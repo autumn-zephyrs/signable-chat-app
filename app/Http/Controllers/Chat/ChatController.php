@@ -8,7 +8,7 @@ use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use App\Events\NewMessage;
 
 class ChatController extends Controller
 {
@@ -36,6 +36,7 @@ class ChatController extends Controller
             'channel_id' => 1,
             'content' => $request->input('message')
         ]);
+        broadcast(new NewMessage($user, $message))->toOthers();
         return ['status' => 'Message Sent!'];
     }
 }
