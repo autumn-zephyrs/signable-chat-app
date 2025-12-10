@@ -31,6 +31,7 @@ const user = page.props.auth.user as User;
 const form = useForm({
     name: user.name,
     email: user.email,
+    display_name: user.display_name  ?? '',
 });
 
 const submit = () => {
@@ -67,6 +68,12 @@ const submit = () => {
                             placeholder="Email address"
                         />
                         <InputError class="mt-2" :message="form.errors.email" />
+                    </div>
+
+                    <div class="grid gap-2">
+                        <Label for="display_name">Display Name</Label>
+                        <Input id="display_name" class="mt-1 block w-full" v-model="form.display_name" autocomplete="display_name" placeholder="The name you'll appear as to others" />
+                        <InputError class="mt-2" :message="form.errors.display_name" />
                     </div>
 
                     <div v-if="mustVerifyEmail && !user.email_verified_at">
