@@ -21,6 +21,7 @@ class ChatController extends Controller
 
         return Inertia::render('Chat',  [
             'messages' => $messages,
+            'user'  => Auth::user(),
         ]);
     }
 

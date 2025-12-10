@@ -17,6 +17,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const page = usePage();
 const messages = computed(() => page.props.messages ?? []);
+const user = computed(() => page.props.user);
 
 </script>
 
@@ -28,7 +29,7 @@ const messages = computed(() => page.props.messages ?? []);
         <div class="flex h-7/8 flex-1 flex-col gap-4 rounded-xl p-4">
             
             <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min px-8 py-4">
-                <ChatWindow :messages="messages" />
+                <ChatWindow :messages="messages" :user="user" />
                 <ChatForm />
             </div>
         </div>

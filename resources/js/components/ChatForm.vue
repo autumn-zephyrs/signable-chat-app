@@ -1,19 +1,21 @@
 <template>
-  <div class="input-group pt-4">
-    <input
-      id="btn-input"
-      type="text"
-      name="message"
-      class="form-control input-sm"
-      placeholder="Message..."
-      v-model="newMessage"
-      @keyup.enter="sendMessage"
-    />
-    <span class="input-group-btn">
-      <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
-        Send
-      </button>
-    </span>
+  <div class="flexl">
+    <div class="input-group pt-4">
+      <input
+        id="btn-input"
+        type="text"
+        name="message"
+        class="form-control input-sm"
+        placeholder="Message..."
+        v-model="newMessage"
+        @keyup.enter="sendMessage"
+      />
+      <span class="input-group-btn pl-4">
+        <button class="btn btn-primary btn-sm font-bold border p-2 rounded cursor-pointer" id="btn-chat" @click="sendMessage">
+          Send
+        </button>
+      </span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -34,17 +36,12 @@ const sendMessage = async (): Promise<void> => {
 
   try {
     const res = await axios.post('/chat/send', { message: text });
-    const serverMessage = res.data?.message as Message | undefined;
+    const serverMessage = res.data.message as Message | undefined;
 
     if (serverMessage) {
       emit('messagesent', serverMessage);
-    } else {
-      // fallback if server doesn't return the created message
-      emit('messagesent', {
-        content: text,
-        user: props.user ?? null,
-      });
-    }
+    } 
+
   } catch (err) {
     console.error(err);
   } finally {
