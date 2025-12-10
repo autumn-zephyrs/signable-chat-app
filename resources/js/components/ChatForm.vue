@@ -47,5 +47,6 @@ const sendMessage = async (): Promise<void> => {
   } finally {
     newMessage.value = '';
   }
+  window.location.reload();
 };
 </script>
