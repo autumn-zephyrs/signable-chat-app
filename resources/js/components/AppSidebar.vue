@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { LucideHome } from 'lucide-vue-next';
+import { LucideHome, LucideMessageCircle } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -21,6 +21,11 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LucideHome,
+    },
+    {
+        title: 'Chat',
+        href: '/chat',
+        icon: LucideMessageCircle,
     },
 ];
 </script>
