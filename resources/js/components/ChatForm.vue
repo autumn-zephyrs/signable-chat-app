@@ -26,7 +26,7 @@ type User = { id?: number; name: string; display_name?: string | null };
 type Message = { id?: number; content: string; created_at?: string; user?: User | null };
 
 const props = defineProps<{ user?: User | null }>();
-const emit = defineEmits<(e: 'messagesent', payload: Message) => void>();
+const emit = defineEmits<(e: 'newmessage', payload: Message) => void>();
 
 const newMessage = ref('');
 
@@ -36,10 +36,10 @@ const sendMessage = async (): Promise<void> => {
 
   try {
     const res = await axios.post('/chat/send', { message: text });
-    const serverMessage = res.data.message as Message | undefined;
+    const serverMessage = res.data.message as Message;
 
     if (serverMessage) {
-      emit('messagesent', serverMessage);
+      emit('newmessage', serverMessage);
     } 
 
   } catch (err) {
